@@ -1,14 +1,17 @@
 package com.sber.phonebook.model;
 
+/**
+ * Класс представляет запись в телефонном справочнике.
+ */
 public class phoneModel{
     private String name;
     private String number;
     private long lastChange;
 
-    /*
+    /**
     @param name имя владельца
     @param number номер телефона
-    @param lastChange время последнего изменения
+    @param lastChange время последнего изменения в мс
     */
     public phoneModel (String name, String number, long lastChange){
         this.name = name;
