@@ -36,6 +36,8 @@ public class phoneService{
             phonebook.put(name, new phoneModel(name, number, startTime));
         });
         logger.info("phonebook is initialized with {} records", INIT_SIZE);
+        numberUpdate();
+        printTask(startTime);
     }
 
     /**
@@ -70,6 +72,7 @@ public class phoneService{
                     .filter(phone -> phone.getLastChange() <= mAgo)
                     .forEach(phone -> logger.info("phone from M sec ago: {}", phone));
             logger.info("printed phones that were unchanged for {} sec", mSec);
+            scheduler.shutdown();
         };
         scheduler.schedule(print, tSec, TimeUnit.SECONDS);
     }
