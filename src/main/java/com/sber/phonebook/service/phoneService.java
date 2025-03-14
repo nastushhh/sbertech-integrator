@@ -70,9 +70,9 @@ public class phoneService{
             long mAgo = currentTime - (mSec * 1000L);
             phonebook.values().stream()
                     .filter(phone -> phone.getLastChange() <= mAgo)
-                    .forEach(phone -> logger.info("phone from M sec ago: {}", phone));
+                    .forEach(phone -> logger.info("record from {} sec ago: {}", mSec, phone));
             logger.info("printed phones that were unchanged for {} sec", mSec);
-            scheduler.shutdown();
+            scheduler.shutdownNow();
         };
         scheduler.schedule(print, tSec, TimeUnit.SECONDS);
     }
