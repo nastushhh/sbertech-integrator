@@ -3,7 +3,9 @@ package com.sber.phonebook.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.sber.phonebook.model.phoneModel;
+import com.sber.phonebook.generation.randomGen;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 /**
@@ -13,7 +15,7 @@ public class phoneService{
     private static final Logger logger = LoggerFactory.getLogger(phoneService.class);
     private final Map<String, phoneModel> phonebook = new HashMap<>();
     private static final int INIT_SIZE = 100000;
-
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     /**
      * Инициализирует справочник из 100000 записей.
      */
@@ -26,6 +28,27 @@ public class phoneService{
         });
         logger.info("phonebook is initialized with {} records", INIT_SIZE);
     }
+
+    /**
+     * Данная функция запускает обновление номеров.
+     */
+    private void numberUpdate(){
+        Runnable updateTask = () ->{
+            int numbersToUpdate = ThreadLocalRandom.current().nextInt(1, INIT_SIZE / 10);
+            IntStream.range(0, numbersToUpdate).forEach(i -> {
+                String key = "user" + ThreadLocalRandom.current().nextInt(INIT_SIZE);
+                phoneModel phone = phonebook.get(key);
+                if (phone != null){
+                    phone.setNumber(phoneNumberGeneration.generatePhoneNumber());
+                    phone.setLastChange(System.currentTimeMillis());
+                }
+            });
+            logger.info("updated {} phone numbers", numbersToUpdate);
+            scheduler.schedule(this::numberUpdate, randomGen.getRandomN(), TimeUnit.MILLISECONDS);
+        };
+        scheduler.schedule(updateTask, randomGen.getRandomN(), TimeUnit.MILLISECONDS);
+    }
+
     /**
      * Возвращает текущий размер справочника.
      * @return размер справочника
