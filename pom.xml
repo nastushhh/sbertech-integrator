@@ -8,6 +8,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -54,7 +55,6 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <shadedArtifactAttached>false</shadedArtifactAttached>
                             <finalName>phonebook</finalName>
-                            <minimizeJar>true</minimizeJar>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.sber.phonebook.Main</mainClass>
@@ -80,7 +80,7 @@
                 <version>3.6.3</version>
                 <configuration>
                     <source>17</source>
-                    <show>public</show>
+                    <show>private</show> <!-- Изменено на private для всех методов -->
                     <destDir>javadoc</destDir>
                 </configuration>
                 <executions>

@@ -27,7 +27,7 @@
    mvn clean package
 4. Запустите программу: 
     ```bash
-   java -jar target/phonebook-1.0.jar
+   java -jar target/phonebook.jar
 
 ## Тесты
 
