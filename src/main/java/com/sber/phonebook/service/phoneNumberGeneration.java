@@ -4,11 +4,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Генератор случайных телефонных номеров.
+ * <p>Создает номер в формате {@code +7-xxx-xxx-xx-xx}, где каждая группа цифр генерируется случайным образом.</p>
  */
 public class phoneNumberGeneration{
     /**
-     *Данный класс генерирует случайный номер телефона в формате +7-xxx-xxx-xx-xx
-     * @return сгенерированный номер телефона
+     * Генерирует случайный номер телефона в формате {@code +7-xxx-xxx-xx-xx}.
+     * @return сгенерированный номер телефона в виде строки
      */
     public static String generatePhoneNumber(){
         int p1 = ThreadLocalRandom.current().nextInt(100, 1000);

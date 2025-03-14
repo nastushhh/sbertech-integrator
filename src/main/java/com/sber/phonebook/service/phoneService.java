@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 /**
  * Сервис для управления телефонным справочником.
+ * <p>Позволяет инициализировать справочник, обновлять номера, выводить записи.</p>
  */
 public class phoneService{
     private static final Logger logger = LoggerFactory.getLogger(phoneService.class);
@@ -19,6 +20,10 @@ public class phoneService{
     private final int mSec;
     private final int tSec;
 
+    /**
+     * Конструктор сервиса.
+     * <p>Генерирует случайные значения M и T, которые используются для обновления и вывода номеров.</p>
+     */
     public phoneService(){
         this.mSec = randomGen.getRandomM();
         this.tSec = randomGen.getRandomT();
@@ -27,6 +32,7 @@ public class phoneService{
 
     /**
      * Инициализирует справочник из 100000 записей.
+     * <p>Для каждой записи создается случайное имя и номер телефона.</p>
      */
     public void initialize(){
         long startTime = System.currentTimeMillis();
@@ -41,7 +47,8 @@ public class phoneService{
     }
 
     /**
-     * Данная функция запускает обновление номеров.
+     * Данная функция запускает процесс обновление случайных номеров.
+     * <p>Обновляет часть номеров в справочнике, затем планирует следующее обновление.</p>
      */
     private void numberUpdate(){
         Runnable updateTask = () ->{
@@ -61,7 +68,8 @@ public class phoneService{
     }
 
     /**
-     * Данный метод выводит записи через T секунд.
+     * Данный метод выводит через заданное время T записи, которые не изменялись более M секунд.
+     * <p>Запускает задачу, которая фильтрует и выводит устаревшие записи.</p>
      * @param startTime время начала программы.
      */
     private void printTask(long startTime){
@@ -79,7 +87,7 @@ public class phoneService{
 
     /**
      * Возвращает текущий размер справочника.
-     * @return размер справочника
+     * @return количество записей в справочнике
      */
     public int getSize(){
         return phonebook.size();
