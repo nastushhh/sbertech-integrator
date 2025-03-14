@@ -1,0 +1,5 @@
+com/sber/phonebook/service/phoneService.class
+com/sber/phonebook/Main.class
+com/sber/phonebook/generation/randomGen.class
+com/sber/phonebook/service/phoneNumberGeneration.class
+com/sber/phonebook/model/phoneModel.class
