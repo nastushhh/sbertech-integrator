@@ -52,6 +52,9 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+                            <finalName>phonebook</finalName>
+                            <minimizeJar>true</minimizeJar>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.sber.phonebook.Main</mainClass>
@@ -70,6 +73,25 @@
                         <include>**/*Test.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <configuration>
+                    <source>17</source>
+                    <show>public</show>
+                    <destDir>javadoc</destDir>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-javadoc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
