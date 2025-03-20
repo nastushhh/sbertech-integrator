@@ -1,4 +1,4 @@
-# phonebook application
+# phonebook application (java)
 
 Программа реализует телефонный справочник с динамическим обновлением записей.
 
